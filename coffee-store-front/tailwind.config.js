@@ -13,7 +13,11 @@ export default {
       primary: "#331A15",
       accent: "#D2B48C",
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        Rancho: "Rancho, cursive",
+      },
+    },
   },
   plugins: [],
 };
