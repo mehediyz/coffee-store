@@ -3,6 +3,7 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     colors: {
+      transparent: "transparent",
       gray: {
         100: "#F7F7F7",
         200: "#ECEAE3",
@@ -11,7 +12,7 @@ export default {
       white: "#FFF",
       dark: "#1B1A1A",
       primary: "#331A15",
-      accent: "#D2B48C",
+      accent: "#E3B577",
     },
     extend: {
       fontFamily: {
