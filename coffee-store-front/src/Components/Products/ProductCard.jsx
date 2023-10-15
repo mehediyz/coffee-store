@@ -1,27 +1,20 @@
-import product1 from "./../../assets/images/1.png";
-import product2 from "./../../assets/images/2.png";
-
-const ProductCard = () => {
+const ProductCard = ({ data }) => {
+  const { _id, photo, name, chef, price } = data;
   return (
     <div className="bg-gray-200 p-4 rounded-md">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <img src={product1} />
+          <img src={photo} />
           <div className="flex flex-col gap-2">
             <p className="text-dark font-semibold text-xl">
-              Name:{" "}
-              <span className="text-gray-300 font-normal">
-                Americano Coffee
-              </span>
+              Name: <span className="text-gray-300 font-normal">{name}</span>
             </p>
             <p className="text-dark font-semibold text-xl">
-              Chef:{" "}
-              <span className="text-gray-300 font-normal">
-                Americano Coffee
-              </span>
+              Chef: <span className="text-gray-300 font-normal">{chef}</span>
             </p>
             <p className="text-dark font-semibold text-xl">
-              Price: <span className="text-gray-300 font-normal">100 Tk</span>
+              Price:{" "}
+              <span className="text-gray-300 font-normal">{price} Tk</span>
             </p>
           </div>
         </div>

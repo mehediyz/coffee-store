@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
 
-const PopularProducts = () => {
+const PopularProducts = ({ data }) => {
   return (
     <div>
       <div className="container mx-auto py-32">
@@ -19,8 +19,9 @@ const PopularProducts = () => {
           </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <ProductCard />
-          <ProductCard />
+          {data.map((item) => (
+            <ProductCard key={item._id} data={item} />
+          ))}
         </div>
       </div>
     </div>
