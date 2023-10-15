@@ -26,7 +26,7 @@ const ProductCard = ({ data }) => {
           </button>
 
           <button className="font-semibold bg-dark p-4 rounded-md text-white">
-            Edit
+            <Link to={`/coffee/update/${_id}`}>Edit</Link>
           </button>
           <button className="font-semibold bg-[#EA4744] p-4 rounded-md text-white">
             Delete
