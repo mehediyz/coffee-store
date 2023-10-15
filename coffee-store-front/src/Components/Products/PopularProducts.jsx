@@ -1,7 +1,22 @@
 import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
+import { useState } from "react";
 
 const PopularProducts = ({ data }) => {
+  const [loadedData, setLoadedData] = useState(data);
+  const deleteHandler = (_id) => {
+    fetch(`http://localhost:5000/coffee/${_id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.deletedCount > 0) {
+          const updated = loadedData.filter((item) => item._id !== _id);
+          setLoadedData(updated);
+        }
+      });
+  };
   return (
     <div>
       <div className="container mx-auto py-32">
@@ -19,8 +34,12 @@ const PopularProducts = ({ data }) => {
           </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {data.map((item) => (
-            <ProductCard key={item._id} data={item} />
+          {loadedData.map((item) => (
+            <ProductCard
+              key={item._id}
+              data={item}
+              deleteHandler={deleteHandler}
+            />
           ))}
         </div>
       </div>
