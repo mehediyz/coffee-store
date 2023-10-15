@@ -1,7 +1,18 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const ProductCard = ({ data }) => {
   const { _id, photo, name, chef, price } = data;
+
+  const deleteHandler = (_id) => {
+    fetch(`http://localhost:5000/coffee/${_id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
   return (
     <div className="bg-gray-200 p-4 rounded-md">
       <div className="flex items-center justify-between">
@@ -28,7 +39,10 @@ const ProductCard = ({ data }) => {
           <button className="font-semibold bg-dark p-4 rounded-md text-white">
             <Link to={`/coffee/update/${_id}`}>Edit</Link>
           </button>
-          <button className="font-semibold bg-[#EA4744] p-4 rounded-md text-white">
+          <button
+            onClick={() => deleteHandler(_id)}
+            className="font-semibold bg-[#EA4744] p-4 rounded-md text-white"
+          >
             Delete
           </button>
         </div>
