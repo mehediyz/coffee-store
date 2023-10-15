@@ -2,8 +2,30 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Add = () => {
+  const addCoffeeHandler = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const supplier = form.supplier.value;
+    const category = form.category.value;
+    const chef = form.chef.value;
+    const taste = form.taste.value;
+    const details = form.details.value;
+    const photo = form.photo.value;
+    const newCoffee = { name, supplier, category, chef, taste, details, photo };
+
+    fetch("http://localhost:5000/coffee", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newCoffee),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-10 max-w-3xl">
       <Link to={"/"} className="font-Rancho text-3xl text-dark drop-shadow-md">
         &larr; Back to home
       </Link>
@@ -17,7 +39,7 @@ const Add = () => {
           using Lorem Ipsum is that it has a more-or-less normal distribution of
           letters, as opposed to using Content here.
         </p>
-        <form>
+        <form onSubmit={addCoffeeHandler}>
           <div className="flex gap-4">
             <div className="grid grid-cols-2 gap-4 w-full">
               <label className="font-semibold text-xl">
@@ -25,6 +47,7 @@ const Add = () => {
                 <input
                   className="block my-2 p-2 w-full text-base font-normal rounded-md"
                   type="text"
+                  name="name"
                   placeholder="Enter coffee name"
                 />
               </label>
@@ -33,6 +56,7 @@ const Add = () => {
                 <input
                   className="block my-2 p-2 w-full text-base font-normal rounded-md"
                   type="text"
+                  name="supplier"
                   placeholder="Enter coffee supplier"
                 />
               </label>
@@ -41,6 +65,7 @@ const Add = () => {
                 <input
                   className="block my-2 p-2 w-full text-base font-normal rounded-md"
                   type="text"
+                  name="category"
                   placeholder="Enter coffee category"
                 />
               </label>
@@ -49,6 +74,7 @@ const Add = () => {
                 <input
                   className="block my-2 p-2 w-full text-base font-normal rounded-md"
                   type="text"
+                  name="chef"
                   placeholder="Enter coffee chef"
                 />
               </label>
@@ -57,6 +83,7 @@ const Add = () => {
                 <input
                   className="block my-2 p-2 w-full text-base font-normal rounded-md"
                   type="text"
+                  name="taste"
                   placeholder="Enter coffee taste"
                 />
               </label>
@@ -65,6 +92,7 @@ const Add = () => {
                 <input
                   className="block my-2 p-2 w-full text-base font-normal rounded-md"
                   type="text"
+                  name="details"
                   placeholder="Enter coffee details"
                 />
               </label>
@@ -73,10 +101,14 @@ const Add = () => {
                 <input
                   className="block my-2 p-2 w-full text-base font-normal rounded-md"
                   type="text"
+                  name="photo"
                   placeholder="Enter photo URL"
                 />
               </label>
-              <button className="bg-accent outline outline-2 outline-primary font-Rancho text-2xl py-1 block w-full font-normal rounded-md col-span-2 hover:outline-dark hover:bg-primary hover:text-white transition duration-200 hover:ease-in-out">
+              <button
+                type="submit"
+                className="bg-accent outline outline-2 outline-primary font-Rancho text-2xl py-1 block w-full font-normal rounded-md col-span-2 hover:outline-dark hover:bg-primary hover:text-white transition duration-200 hover:ease-in-out"
+              >
                 Add Coffee
               </button>
             </div>
