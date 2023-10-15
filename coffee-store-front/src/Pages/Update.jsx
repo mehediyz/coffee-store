@@ -24,7 +24,7 @@ const Update = () => {
       photo,
     };
 
-    fetch(`http://localhost:5000/coffee/update/${data._id}`, {
+    fetch(`https://coffee-store-seven.vercel.app/coffee/update/${data._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
