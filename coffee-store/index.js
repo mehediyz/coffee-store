@@ -6,7 +6,7 @@ const port = 5000;
 app.use(cors());
 app.use(express.json());
 
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.dqfkiqe.mongodb.net/?retryWrites=true&w=majority`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -25,10 +25,10 @@ async function run() {
     // Send a ping to confirm a successful connection
 
     const database = client.db("coffeeDB");
-    const coffee = database.collection("coffee");
+    const coffeeCollection = database.collection("coffee");
 
     app.get("/coffee", async (req, res) => {
-      const cursor = coffee.find();
+      const cursor = coffeeCollection.find();
       const result = await cursor.toArray();
       res.send(result);
     });
@@ -45,9 +45,16 @@ async function run() {
         photo: newCoffee.photo,
       };
 
-      const result = await coffee.insertOne(add);
+      const result = await coffeeCollection.insertOne(add);
       console.log(newCoffee);
       res.send(result);
+    });
+
+    app.get("/coffee/:id", async (req, res) => {
+      const id = req.params;
+      const query = { _id: new ObjectId(id) };
+      const coffee = await coffeeCollection.findOne(query);
+      res.send(coffee);
     });
 
     await client.db("admin").command({ ping: 1 });

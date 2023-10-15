@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const ProductCard = ({ data }) => {
   const { _id, photo, name, chef, price } = data;
   return (
@@ -20,8 +22,9 @@ const ProductCard = ({ data }) => {
         </div>
         <div className="flex flex-col items-stretch gap-2 pr-4">
           <button className="font-semibold bg-accent p-4 rounded-md">
-            View
+            <Link to={`/view/${_id}`}>View</Link>
           </button>
+
           <button className="font-semibold bg-dark p-4 rounded-md text-white">
             Edit
           </button>
