@@ -1,9 +1,24 @@
 import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../AuthProvider";
 
-const PopularProducts = ({ data }) => {
-  const [loadedData, setLoadedData] = useState(data);
+const PopularProducts = () => {
+  const { loading, setLoading } = useContext(AuthContext);
+  const [loadedData, setLoadedData] = useState([]);
+
+  console.log(loadedData);
+  useEffect(() => {
+    setLoading(true);
+    fetch("http://localhost:5000/coffee")
+      .then((res) => res.json())
+      .then((data) => {
+        setLoadedData(data);
+        setLoading(false);
+      });
+  }, []);
+  console.log(loading);
+
   const deleteHandler = (_id) => {
     fetch(`http://localhost:5000/coffee/${_id}`, {
       method: "DELETE",
@@ -33,15 +48,19 @@ const PopularProducts = ({ data }) => {
             </button>
           </Link>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {loadedData.map((item) => (
-            <ProductCard
-              key={item._id}
-              data={item}
-              deleteHandler={deleteHandler}
-            />
-          ))}
-        </div>
+        {loading ? (
+          <p className="text-center">Loading</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {loadedData.map((item) => (
+              <ProductCard
+                key={item._id}
+                data={item}
+                deleteHandler={deleteHandler}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
