@@ -5,17 +5,18 @@ const SignUp = () => {
   const signupHandler = (e) => {
     e.preventDefault();
     const form = e.target;
+    const name = form.name.value;
     const email = form.email.value;
-    const password = form.supplier.value;
+    const password = form.password.value;
 
-    const user = { email, password };
+    const user = { name, email, password };
 
-    fetch("http://localhost:5000/user", {
+    fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(newCoffee),
+      body: JSON.stringify(user),
     })
       .then((res) => res.json())
       .then((data) => console.log(data));
@@ -32,6 +33,15 @@ const SignUp = () => {
         <p className="text-dark text-center text-lg">Create your account</p>
         <form onSubmit={signupHandler}>
           <div className="flex flex-col gap-4">
+            <label className="font-semibold text-xl">
+              Name
+              <input
+                className="block my-2 p-2 w-full text-base font-normal rounded-md"
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+              />
+            </label>
             <label className="font-semibold text-xl">
               Email
               <input
