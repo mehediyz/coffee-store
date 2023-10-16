@@ -10,7 +10,7 @@ const SignIn = () => {
 
     const user = { email, password };
 
-    fetch("https://coffee-store-seven.vercel.app/user", {
+    fetch("http://localhost:5000/user", {
       method: "POST",
       headers: {
         "content-type": "application/json",

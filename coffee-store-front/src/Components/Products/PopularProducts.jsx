@@ -5,7 +5,7 @@ import { useState } from "react";
 const PopularProducts = ({ data }) => {
   const [loadedData, setLoadedData] = useState(data);
   const deleteHandler = (_id) => {
-    fetch(`https://coffee-store-seven.vercel.app/coffee/${_id}`, {
+    fetch(`http://localhost:5000/coffee/${_id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

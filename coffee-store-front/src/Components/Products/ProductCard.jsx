@@ -5,7 +5,7 @@ const ProductCard = ({ data, deleteHandler }) => {
   const { _id, photo, name, chef, price } = data;
 
   // const deleteHandler = (_id) => {
-  //   fetch(`https://coffee-store-seven.vercel.app/coffee/${_id}`, {
+  //   fetch(`http://localhost:5000/coffee/${_id}`, {
   //     method: "DELETE",
   //   })
   //     .then((res) => res.json())
@@ -32,13 +32,18 @@ const ProductCard = ({ data, deleteHandler }) => {
           </div>
         </div>
         <div className="flex flex-col items-stretch gap-2 pr-4">
-          <button className="font-semibold bg-accent p-4 rounded-md">
-            <Link to={`/view/${_id}`}>View</Link>
-          </button>
-
-          <button className="font-semibold bg-dark p-4 rounded-md text-white">
-            <Link to={`/coffee/update/${_id}`}>Edit</Link>
-          </button>
+          <Link
+            className="font-semibold bg-accent p-4 rounded-md text-center"
+            to={`/view/${_id}`}
+          >
+            <button>View</button>
+          </Link>
+          <Link
+            className="font-semibold bg-dark p-4 rounded-md text-white text-center"
+            to={`/coffee/update/${_id}`}
+          >
+            <button>Edit</button>
+          </Link>
           <button
             onClick={() => deleteHandler(_id)}
             className="font-semibold bg-[#EA4744] p-4 rounded-md text-white"
